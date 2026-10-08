@@ -27,7 +27,7 @@ def midfix_to_postfix(tokens):
 def cal_new_expr(expr):
 
     st = []
-    for t in expr:
+    for t in post:
         if t in ('0', '1'):
             st.append(int(t))
         elif t == '!':

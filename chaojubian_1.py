@@ -23,7 +23,7 @@ def solve():
         return "registration complete"
 
     for user in users:
-        print(check(user))
+        print(f"{user}-> {check(user)}")
 
 
 

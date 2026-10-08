@@ -14,7 +14,10 @@
 一行一个数字表示答案, 表示这个最大值期望, 输出结果保留6为小数。
 
 思路
+
 找到左边第一个大于a[i]的数, 找到右边第一个大于等于a[i]的数，两边都是
+
+
 """
 import sys
 
@@ -25,45 +28,44 @@ def solve():
     n = int(data[0])
     a = [int(x) for x in data[1:1+n]]
 
+    # 找到左边第一个大于a[i]的值
     left = [0] * n
     stack = []
 
     for i in range(n):
 
+        # 小于等于a[i]的都弹出单调栈,  留下来那个就是第一个大于a[i]的索引, 
         while stack and a[stack[-1]] <= a[i]:
             stack.pop()
-
-        if stack:
-            left[i] = stack[-1]
-        else:
-            left[i] = -1
-
+        left[i] = stack[-1] if stack else -1
         stack.append(i)
 
-    right = [0] * n
+    print(left)
 
+    right = [n] * n
     stack = []
-    for i in range(n-1, -1, -1):
 
+    for i in range(n - 1, -1, -1):
+
+        # 小于a[i]的都弹出单调栈, 留下来那个就是第一个大于等于a[i]的索引
         while stack and a[stack[-1]] < a[i]:
             stack.pop()
-        if stack:
-            right[i] = stack[-1]
-        else:
-            right[i] = n
-
+        right[i] = stack[-1] if stack else n
         stack.append(i)
 
+    print(right)
+
     total = 0
-
+    cnt = 0
     for i in range(n):
-        cnt = (i - left[i]) * (right[i] - i)
-        total += a[i] * cnt
+        cnt += (i - left[i]) * (right[i] - i)
+        total += (i - left[i]) * (right[i] - i) * a[i]
 
-    all_sub = n * (n + 1) // 2
+    print(f"total:{total} -> cnt:{cnt}")
+    ans = total / cnt
 
-    ans = total / all_sub
-    print("{0:.6f}".format(ans))    
+    print(f"{ans:.6f}")
+
 
 
 if __name__ == "__main__":

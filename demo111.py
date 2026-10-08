@@ -1,7 +1,11 @@
-#coding=utf-8
-# 本题为考试单行多行输入输出规范示例，无需提交，不计分。
+s = "12+3-11"
+operators = set("+-*/")
+result = ""
 
+for ch in s:
+    if ch in operators:
+        result += " " + ch + " "
+    else:
+        result += ch
 
-a = "adbcd"
-
-a.isalpha
+print(result)  # 12 + 3 - 11
