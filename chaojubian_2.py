@@ -28,43 +28,47 @@ def solve():
     n = int(data[0])
     a = [int(x) for x in data[1:1+n]]
 
-    # 找到左边第一个大于a[i]的值
     left = [0] * n
     stack = []
 
+    # 先找左边第一个大于a[i]的数
     for i in range(n):
 
-        # 小于等于a[i]的都弹出单调栈,  留下来那个就是第一个大于a[i]的索引, 
         while stack and a[stack[-1]] <= a[i]:
             stack.pop()
-        left[i] = stack[-1] if stack else -1
+    
+        if stack:
+            left[i] = stack[-1]
+        else:
+            left[i] = -1
+ 
         stack.append(i)
 
-    print(left)
-
-    right = [n] * n
+    right = [0] * n
     stack = []
 
     for i in range(n - 1, -1, -1):
 
-        # 小于a[i]的都弹出单调栈, 留下来那个就是第一个大于等于a[i]的索引
         while stack and a[stack[-1]] < a[i]:
             stack.pop()
-        right[i] = stack[-1] if stack else n
+        if stack:
+            right[i] = stack[-1]
+        else:
+            right[i] = n
+
         stack.append(i)
 
-    print(right)
-
-    total = 0
     cnt = 0
+    add = 0
     for i in range(n):
+
         cnt += (i - left[i]) * (right[i] - i)
-        total += (i - left[i]) * (right[i] - i) * a[i]
+        add += ((i - left[i]) * (right[i] - i)) * a[i]
 
-    print(f"total:{total} -> cnt:{cnt}")
-    ans = total / cnt
+    print(f"cnt:{cnt}, add:{add}")
 
-    print(f"{ans:.6f}")
+    res = add / cnt
+    print("{0:.6f}".format(res))
 
 
 

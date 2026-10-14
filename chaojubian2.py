@@ -63,6 +63,7 @@ def solve():
     all_sub = n * (n + 1) // 2
 
     ans = total / all_sub
+    print(f"totol:{total}, all_sub:{all_sub}")
     print("{0:.6f}".format(ans))    
 
 

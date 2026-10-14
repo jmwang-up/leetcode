@@ -5,30 +5,22 @@ class Solution:
     def evalRPN(self, tokens: List[str]) -> int:
 
         st = []
+        operate_func = {
+            "+" : lambda x,y:x+y,
+            '-': lambda x,y:x-y,
+            '*': lambda x,y:x*y,
+            '/': lambda x,y:int(x/y)
+        }
 
         for ch in tokens:
-            print(st)
-            if ch == '+':
-                a = st.pop()
-                b = st.pop()
-                st.append(a + b)
-            elif ch == '-':
-                a = st.pop()
-                b = st.pop()
-                st.append(b - a)
-            elif ch == '*':
-                a = st.pop()
-                b = st.pop()
-                st.append(a * b)
-            elif ch == '/':
-                a = st.pop()
-                b = st.pop()
-                st.append(int(b/a))
-            else:
+            if ch not in "+-*/":
                 st.append(int(ch))
-            
+            else:
+                a = st.pop()
+                b = st.pop()
+                st.append(operate_func[ch](b,a))
 
-        return st[0]
+        return st[-1]
 
 
 
