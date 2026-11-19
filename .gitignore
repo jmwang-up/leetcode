@@ -1,7 +1,9 @@
 # Python virtual environments
 .venv/
+.venv*/
 venv/
 env/
+.wenv/
 
 # Python bytecode and tool caches
 __pycache__/
@@ -14,3 +16,6 @@ __pycache__/
 .env
 .env.*
 !.env.example
+
+# Runtime logs
+*.log

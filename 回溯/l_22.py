@@ -27,7 +27,7 @@ class Solution:
 
         def back_strace(path):
 
-            if len(path) == 6:
+            if len(path) == n:
                 if isValid(path):
                     ans.append(path)
                 return

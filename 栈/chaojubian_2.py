@@ -14,7 +14,10 @@
 一行一个数字表示答案, 表示这个最大值期望, 输出结果保留6为小数。
 
 思路
+
 找到左边第一个大于a[i]的数, 找到右边第一个大于等于a[i]的数，两边都是
+
+
 """
 import sys
 
@@ -28,22 +31,23 @@ def solve():
     left = [0] * n
     stack = []
 
+    # 先找左边第一个大于a[i]的数
     for i in range(n):
 
         while stack and a[stack[-1]] <= a[i]:
             stack.pop()
-
+    
         if stack:
             left[i] = stack[-1]
         else:
             left[i] = -1
-
+ 
         stack.append(i)
 
     right = [0] * n
-
     stack = []
-    for i in range(n-1, -1, -1):
+
+    for i in range(n - 1, -1, -1):
 
         while stack and a[stack[-1]] < a[i]:
             stack.pop()
@@ -54,16 +58,18 @@ def solve():
 
         stack.append(i)
 
-    total = 0
-
+    cnt = 0
+    add = 0
     for i in range(n):
-        cnt = (i - left[i]) * (right[i] - i)
-        total += a[i] * cnt
 
-    all_sub = n * (n + 1) // 2
+        cnt += (i - left[i]) * (right[i] - i)
+        add += ((i - left[i]) * (right[i] - i)) * a[i]
 
-    ans = total / all_sub
-    print("{0:.6f}".format(ans))    
+    print(f"cnt:{cnt}, add:{add}")
+
+    res = add / cnt
+    print("{0:.6f}".format(res))
+
 
 
 if __name__ == "__main__":
